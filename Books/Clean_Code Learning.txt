@@ -1,0 +1,159 @@
+Chapter-2: Meaningful Names
+-----------------------------
+1. It is easy to say that names should reveal intent. If a name requires a comment then the name does not reveal its intent.
+example:
+========
+a. Variables name should be like this:
+	int elapsedTimeInDays;
+	int daysSinceCreation;
+	int daysSinceModification;
+	int fileAgeInDays;
+
+b. A beautiful code Snippt which expresses explicity is:
+	public List<Cell> getFlaggedCells(){
+	List<Cell> flaggedCells = new ArrayList<Cell>();
+	for(Cell cell:flaggedCells)
+	if(cell.isFlagged())
+	flaggedCells.add(cell);	
+	return flaggedCells;
+	}
+
+2. Avoid disinformations:
+=========================
+a. Do not reffer a group of accounts as accountList if it is not a List.
+b. A good name would be: accountGroup, bunchOfAccounts or simply accounts
+c. Spelling Similar concepts similarly is information. Using inconsistent spellings is disinformation.
+
+3. Make Meaingful Disitinctions:
+================================
+a. Number series are not disinformative, they are noninformative.
+ex:
+
+public void copyChar(char[] a1, char[] a2) {
+for (int i=0;i< a1.length; i++) {
+	a2[i] = a1[i];
+}
+}
+
+here this would be better to write a1[] -> source and a2[] -> destination
+
+b. Make meaningful distincts in variable or method names.
+ex:
+--
+variable names: name/nameString, account/accountInfo/accounts, zork/theZork are noise words and more or less same thing.
+method names: getAccount(), getAccountInfo(),getAccounts() are also noise words
+
+c. Noise words are redundant. the word table should not appear in table name
+
+4. Make Pronounceable names:
+============================
+a. Give the name which is pronounceable. 
+b. If you can't pronounce a name , you can not discuss it without sounding like an idiot
+ex:
+---
+class DtaRcrd102 {
+private Date genymdhms;
+private Date modymdhms;
+private final String pszqint = "102";
+/* ... */
+};
+
+to 
+
+class Customer {
+private Date generationTimestamp;
+private Date modificationTimestamp;;
+private final String recordId = "102";
+/* ... */
+};
+
+5. Use Searchable Names:
+=======================
+a. Longer names trump  shorter names and any searchable name trumps a constant in code.
+b. Likewise the name 'e' is a poor choice for any variable.
+c. single character variables should only be used as a local variable inside short methods.
+
+6. Avoid Encoding:
+==================
+a. Encoded names are seldom pronounceable and easy to mis-type
+
+7. Class Name and Method names:
+===============================
+a. Class name should not be verb it should be noun. Avoid words like: Data, Info, Processor, Manager
+ex: Customer, WikiPage, Account
+b. Method name should be verb. We can also add: get, set or is as prefix of the method names.
+ex: postPayment(), deletePage(), save()
+
+8. Don't be cute:
+================
+a. Do not use "HolyHandGranade" as variable name rather "DeleteItems" would be much better
+b. Avoid any kind of sense of humor. Cuteness in the code ofter appears as a slang
+c. Say what you mean, Mean what you say.
+
+9. Pince One word per concept:
+==============================
+a. get, fetch, retrieve are all the same names. For a single class use: one of this strictly 
+like: getNames(), getAccountNumber() but not both get or fetch etc
+b. It is confusing to have a variable name or method name:
+controller or manager or driver in the same code base.
+
+10. Don't Pun:
+=============
+a. Using same word for two purposes is usually known as pun. Avoid using pun.
+b. If there are already method : add() in a specific class and now i want to insert 
+a specific word in a collection the method name should not be add() here 
+rather we could use : append() or insert()
+ 
+11. Use Solution Domain Names:
+=============================
+a. The AccountVisitor means a great deal to a programmer who knows visitor patterns
+b. It is always better to use technical names for the relevent Algorithms, Design Patterns etc
+
+12. Small:
+==========
+a. The first rule of the function is that they should be small.
+b. The second rule of the function is that they should be smaller than that.
+c. Function should be shorter like 3-4 lines. And it should be mastered in this way:
+	FIRST: write the code and serve the purpose
+	SECOND: Refactor the code
+	THREE: Re-Refactor the code
+d. Functions should do only one thing. They should do it well. They should do it only.
+
+13. One Level Abstraction per Function:
+=======================================
+a. In order to make sure one function does only one thing we have to make sure that
+the statements within a function are all at the same level of abstraction
+
+14. Reading code from Top to Bottom: (The Stepdown Rule)
+=========================================================
+a. We want every function to follow the Top to Bottom rule (The Stepdown Rule).
+
+15. Switch Statement:
+=====================
+a. It is hard to make switch statement to do one thing
+
+b. Ex: Payroll.java
+-------------------
+public Money calculatePay(Employee e) throws InvalidEmployeeType {
+switch (e.type) {
+
+case COMMISSIONED:
+return calculateCommissionedPay(e);
+case HOURLY:
+return calculateHourlyPay(e);
+case SALARIED:
+return calculateSalariedPay(e);
+default:
+throw new InvalidEmployeeType(e.type);
+}
+}
+
+
+Observations: There are several problem with this function:
+=============
+1. It is large, and when new employee types are added, it will grow.
+2. It is very clearly does more than one thing.
+3. It violates the Single Responsibility Principle (SRP). Because there is more than one reason
+for it to change
+4. It violates OCP (Open Close Principle) because it must change whenever new types are added.
+
